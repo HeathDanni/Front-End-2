@@ -7,17 +7,17 @@ const useStyles = makeStyles({
     root: {
         display:"flex",
         flexDirection: "column",
-        marginLeft: "33%",
+        marginLeft: "30%",
     },
     cards: {
-        width: "45%",
+        width: "60%",
         height: "200px",
         display: "flex",
         flexDirection: "column",
         marginBottom: "20px"
     },
     cardText: {
-        marginLeft: "20px",
+        marginLeft: "50px",
         marginTop: "20px",
         display: "flex",
         flexDirection: "column",
