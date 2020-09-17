@@ -7,17 +7,21 @@ const useStyles = makeStyles({
         display:'flex',
         flexDirection: 'column',
         marginLeft: "20%",
+        color: "#6b7280"
     },
 
     card: {
         width: "75%",
-        height: "300px"
+        backgroundColor: "#edf5ea",
+        marginTop: "2%"
     },
+
     form: {
         display: 'flex',
         flexDirection: 'column',
-        margin: "10px"
+        margin: "10px",
     },
+
     input: {
         marginBottom: '20px',
     },
@@ -25,7 +29,12 @@ const useStyles = makeStyles({
     button: {
         width: "30%",
         marginTop: "20px",
-        marginLeft: "68%"
+        marginLeft: "68%",
+        marginBottom: "2%",
+        backgroundColor: "#669966",
+        "&:hover": {
+            backgroundColor: "#6b7280"
+        }
     }
 });
 
@@ -35,7 +44,7 @@ const AddPlant = () => {
 
     return (
         <div className={classes.root}>
-            <h2>Add a plant!</h2>
+            <h1>Add a plant!</h1>
             <Card 
             variant="outlined"
             className={classes.card}
