@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
+import MyPlants from "./components/MyPlants";
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
           <Login />
         </Route>
       </Switch>
+        <Route path="/myplants">
+          <MyPlants />
+        </Route>
     </Router>
   );
 }
