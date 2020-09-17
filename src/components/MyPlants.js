@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 
     cards: {
         width: "50%",
-        height: "200px",
+        height: "215px",
         display: "flex",
         marginLeft: "25%",
         flexDirection: "column",
@@ -37,12 +37,15 @@ const useStyles = makeStyles({
     },
     
     button: {
-        marginTop: "15px",
-        marginLeft: "20px",
+        marginTop: "5%",
+        marginLeft: "3%",
         fontSize: "12px",
         width: "50px",
         height: "25px",
-        backgroundColor: "#669966"
+        backgroundColor: "#669966",
+        "&:hover": {
+            backgroundColor: "#6b7280"
+        }
     }
 });
 
