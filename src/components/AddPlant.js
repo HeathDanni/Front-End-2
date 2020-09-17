@@ -6,14 +6,18 @@ const useStyles = makeStyles({
     root: {
         display:'flex',
         flexDirection: 'column',
-        marginLeft: "20%",
-        color: "#6b7280"
     },
 
+    pageName : {
+        marginLeft: "25%",
+        color: "#6b7280"
+        },
+
     card: {
-        width: "75%",
+        width: "50%",
         backgroundColor: "#edf5ea",
-        marginTop: "2%"
+        marginTop: "2%",
+        marginLeft: "25%",
     },
 
     form: {
@@ -44,7 +48,7 @@ const AddPlant = () => {
 
     return (
         <div className={classes.root}>
-            <h1>Add a plant!</h1>
+            <h1 className={classes.pageName}>Add a plant!</h1>
             <Card 
             variant="outlined"
             className={classes.card}
