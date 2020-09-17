@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, TextField, MenuItem, InputLabel, Select} from "@material-ui/core";
+import { Card, TextField, MenuItem, InputLabel, Select, Button} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -8,9 +8,10 @@ const useStyles = makeStyles({
         flexDirection: 'column',
         marginLeft: "20%",
     },
+
     card: {
         width: "75%",
-        height: "250px"
+        height: "300px"
     },
     form: {
         display: 'flex',
@@ -19,6 +20,12 @@ const useStyles = makeStyles({
     },
     input: {
         marginBottom: '20px',
+    },
+
+    button: {
+        width: "30%",
+        marginTop: "20px",
+        marginLeft: "68%"
     }
 });
 
@@ -34,8 +41,8 @@ const AddPlant = () => {
             className={classes.card}
             >
                 <form className={classes.form}>
-                    <TextField id="outlined-basic" label="Plant's Type" variant="outlined" className={classes.form}/>
-                    <TextField id="outlined-basic" label="Plant's Nickname" variant="outlined" className={classes.form}/>
+                    <TextField id="outlined-basic" label="Plant Type" variant="outlined" className={classes.form}/>
+                    <TextField id="outlined-basic" label="Plant Nickname" variant="outlined" className={classes.form}/>
                     <InputLabel id="label" className={classes.form} >Watering Frequency</InputLabel>
                     <Select labelId="label" id="select" value="Every 3 days">
                         <MenuItem value="Everyday">Everyday</MenuItem>
@@ -43,6 +50,12 @@ const AddPlant = () => {
                         <MenuItem value="7">Once a week</MenuItem>
                         <MenuItem value="30">Once a month (recommended for cacti)</MenuItem>
                     </Select>
+                    <Button 
+                    variant="contained" 
+                    color="primary"
+                    className={classes.button}>
+                    Add Plant
+                    </Button>
                 </form>
             </Card>
         </div>
