@@ -6,17 +6,25 @@ const useStyles = makeStyles({
     root: {
         display:"flex",
         flexDirection: "column",
-        marginLeft: "30%",
     },
+
+    pageName : {
+        marginLeft: "25%",
+        color: "#6b7280"
+        },
+
     cards: {
-        width: "60%",
-        height: "230px",
+        width: "50%",
+        height: "200px",
         display: "flex",
+        marginLeft: "25%",
         flexDirection: "column",
-        marginBottom: "20px"
+        marginBottom: "20px",
+        backgroundColor: "#edf5ea"
     },
+
     cardText: {
-        margin: "20px 10%",
+        margin: "20px 3% 10px 10%",
         display: "flex",
         flexDirection: "column",
 
@@ -24,15 +32,16 @@ const useStyles = makeStyles({
 
     buttonDiv: {
         display: "flex",
-        justifyContent: "flex-end"
+        justifyContent: "flex-end",
+        width: "100%"
     },
     
     button: {
-        marginTop: "30px",
-        marginLeft: "10px",
-        width: "60px",
-        length: "15px",
-        fontSize: "10px",
+        marginTop: "15px",
+        marginLeft: "20px",
+        fontSize: "12px",
+        width: "50px",
+        height: "25px",
         backgroundColor: "#669966"
     }
 });
@@ -71,7 +80,7 @@ const MyPlants = () => {
        <div
         className={classes.root}
        >
-           <h2>My Plants</h2>
+           <h1 className={classes.pageName}>My Plants</h1>
             <PlantCard/>
             <PlantCard/>
             <PlantCard/>
