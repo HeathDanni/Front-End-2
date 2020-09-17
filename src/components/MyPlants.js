@@ -16,8 +16,7 @@ const useStyles = makeStyles({
         marginBottom: "20px"
     },
     cardText: {
-        marginLeft: "50px",
-        marginTop: "20px",
+        margin: "20px 10%",
         display: "flex",
         flexDirection: "column",
 
