@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card} from '@material-ui/core';
+import {Card, Button } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     },
     cards: {
         width: "60%",
-        height: "200px",
+        height: "230px",
         display: "flex",
         flexDirection: "column",
         marginBottom: "20px"
@@ -20,6 +20,20 @@ const useStyles = makeStyles({
         display: "flex",
         flexDirection: "column",
 
+    },
+
+    buttonDiv: {
+        display: "flex",
+        justifyContent: "flex-end"
+    },
+    
+    button: {
+        marginTop: "30px",
+        marginLeft: "10px",
+        width: "60px",
+        length: "15px",
+        fontSize: "10px",
+        backgroundColor: "#669966"
     }
 });
 
@@ -38,6 +52,17 @@ const MyPlants = () => {
                     <h3>Plant Type</h3>
                     <span>Nickname: gets from input</span><br></br>
                     <span>Watering frequency: gets from input</span>
+                    <div className={classes.buttonDiv}>
+                        <Button variant="contained" 
+                        color="primary"
+                        className={classes.button}
+                        >
+                            Edit</Button>
+                        <Button variant="contained" 
+                        color="primary"
+                        className={classes.button}>
+                            Remove</Button>
+                    </div>
                 </div>
             </Card>
         )};
