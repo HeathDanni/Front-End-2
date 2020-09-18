@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 import { UserContext } from "./contexts/userContext";
 import Login from "./components/Login";
 import RegisterForm from "./components/RegisterForm";
@@ -10,7 +11,7 @@ import { axiosWithAuth } from "./utils/axiosWithAuth";
 
 function App() {
   const [user, setUser] = useState({});
-  
+
   useEffect(() => {
     axiosWithAuth()
       .get()
@@ -27,12 +28,12 @@ function App() {
             <Login />
             <RegisterForm />
           </Route>
-          <Route path="/myplants">
+          <PrivateRoute path="/myplants">
             <MyPlants />
-          </Route>
-          <Route path="/addplant">
+          </PrivateRoute>
+          <PrivateRoute path="/addplant">
             <AddPlant />
-          </Route>
+          </PrivateRoute>
         </Switch>
       </Router>
     </UserContext.Provider>
