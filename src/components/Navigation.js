@@ -5,6 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import logo from "./logo.png";
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
       color: "#374151",
     },
   },
+  link: {
+    textDecoration:'none'
+  }
 }));
 
 const Navigation = () => {
@@ -38,9 +42,9 @@ const Navigation = () => {
             <img src={logo} className={classes.logo} alt="Logo" />
           </Typography>
 
-          <Button className={classes.button}>My Plants</Button>
-          <Button className={classes.button}>Add Plant</Button>
-          <Button className={classes.button}>My Account</Button>
+          <Link to="/myplants" className={classes.link}><Button className={classes.button}>My Plants</Button></Link>
+          <Link to="/addplant" className={classes.link}><Button className={classes.button}>Add Plant</Button></Link>
+          <Link to="#" className={classes.link}><Button className={classes.button}>My Account</Button></Link>
         </Toolbar>
       </AppBar>
     </div>
