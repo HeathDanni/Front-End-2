@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
-
+import RegisterForm from './components/RegisterForm';
 function App() {
   return (
     <Router>
@@ -12,6 +12,7 @@ function App() {
       <Switch>
         <Route path="/login">
           <Login />
+          <RegisterForm/>
         </Route>
       </Switch>
     </Router>
