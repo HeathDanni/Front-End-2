@@ -52,7 +52,11 @@ const useStyles = makeStyles({
 const Register = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [credentials, setCredentials] = useState({});
+  const [credentials, setCredentials] = useState({
+    username: "",
+    phoneNumber: "",
+    password: "",
+  });
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -60,14 +64,16 @@ const Register = () => {
 
   const register = (e) => {
     e.preventDefault();
+    console.log(credentials);
     axios
       .post(
-        "https://water-my-plants-365.herokuapp.com/api/auth/login",
+        "https://water-my-plants-365.herokuapp.com/api/auth/register",
         credentials
       )
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        history.push("/addplant");
+        console.log(res);
+        // localStorage.setItem("token", res.data.token);
+        // history.push("/addplant");
       })
       .catch((err) => console.error(err));
   };
@@ -81,7 +87,7 @@ const Register = () => {
             <form onSubmit={register} className={classes.root}>
               <TextField
                 className={classes.textField}
-                id="outlined-basic"
+                id="username"
                 label="Username"
                 variant="outlined"
                 name="username"
@@ -89,20 +95,25 @@ const Register = () => {
               />
               <TextField
                 className={classes.textField}
-                id="outlined-basic"
+                id="phoneNumber"
                 label="Phone Number"
                 variant="outlined"
-                name="phone"
+                name="phoneNumber"
+                onChange={handleChange}
               />
 
               <TextField
-                id="outlined-basic"
+                id="password"
                 label="Password"
                 variant="outlined"
+                name="password"
+                type="password"
+                onChange={handleChange}
               />
               <Button
                 variant="contained"
                 color="primary"
+                type="submit"
                 className={classes.button}
               >
                 Create My Account

@@ -88,14 +88,14 @@ const Login = () => {
             <form onSubmit={login} className={classes.root}>
               <TextField
                 className={classes.textField}
-                id="outlined-basic"
+                id="username"
                 label="Username"
                 variant="outlined"
                 name="username"
                 onChange={handleChange}
               />
               <TextField
-                id="outlined-basic"
+                id="password"
                 label="Password"
                 variant="outlined"
                 name="password"
