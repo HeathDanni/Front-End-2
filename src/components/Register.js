@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Button, TextField } from "@material-ui/core";
 
@@ -47,30 +49,50 @@ const useStyles = makeStyles({
   },
 });
 
-const RegisterForm = () => {
+const Register = () => {
   const classes = useStyles();
+  const history = useHistory();
+  const [credentials, setCredentials] = useState({});
 
-  const handleSubmit = () => {
-    console.log("submitting");
+  const handleChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
+
+  const register = (e) => {
+    e.preventDefault();
+    axios
+      .post(
+        "https://water-my-plants-365.herokuapp.com/api/auth/login",
+        credentials
+      )
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        history.push("/addplant");
+      })
+      .catch((err) => console.error(err));
+  };
+
   return (
     <div>
       <h1 className={classes.pageName}>Register</h1>
       <div className={classes.root}>
         <Card className={classes.cards} variant="outlined">
           <div className={classes.cardText}>
-            <form onSubmit={handleSubmit} className={classes.root}>
+            <form onSubmit={register} className={classes.root}>
               <TextField
                 className={classes.textField}
                 id="outlined-basic"
                 label="Username"
                 variant="outlined"
+                name="username"
+                onChange={handleChange}
               />
               <TextField
                 className={classes.textField}
                 id="outlined-basic"
                 label="Phone Number"
                 variant="outlined"
+                name="phone"
               />
 
               <TextField
@@ -93,4 +115,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default Register;

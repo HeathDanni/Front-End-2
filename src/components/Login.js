@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
 import { Card, Button, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles({
@@ -50,12 +51,13 @@ const useStyles = makeStyles({
 
 const Login = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
 
-  const onChange = (e) => {
+  const handleChange = (e) => {
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value,
@@ -65,7 +67,16 @@ const Login = () => {
   const login = (e) => {
     e.preventDefault();
     console.log(credentials);
-    axios.post();
+    axios
+      .post(
+        "https://water-my-plants-365.herokuapp.com/api/auth/login",
+        credentials
+      )
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        history.push("/myplants");
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -80,16 +91,21 @@ const Login = () => {
                 id="outlined-basic"
                 label="Username"
                 variant="outlined"
+                name="username"
+                onChange={handleChange}
               />
-
               <TextField
                 id="outlined-basic"
                 label="Password"
                 variant="outlined"
+                name="password"
+                type="password"
+                onChange={handleChange}
               />
               <Button
                 variant="contained"
                 color="primary"
+                type="submit"
                 className={classes.button}
               >
                 Log In

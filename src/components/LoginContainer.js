@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { Tabs, Tab, Box } from "@material-ui/core";
 import Login from "./Login";
-import RegisterForm from "./RegisterForm";
+import Register from "./Register";
 
 const useStyles = makeStyles({
   root: {
@@ -51,7 +51,7 @@ const LoginContainer = () => {
         <Login />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <RegisterForm />
+        <Register />
       </TabPanel>
     </div>
   );
