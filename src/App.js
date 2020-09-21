@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { UserContext } from "./contexts/userContext";
-import Login from "./components/Login";
-import RegisterForm from "./components/RegisterForm";
+import LoginContainer from "./components/LoginContainer";
 import Navigation from "./components/Navigation";
 import MyPlants from "./components/MyPlants";
 import AddPlant from "./components/AddPlant";
@@ -11,7 +10,7 @@ import { axiosWithAuth } from "./utils/axiosWithAuth";
 
 function App() {
   const [user, setUser] = useState({});
-  
+
   useEffect(() => {
     axiosWithAuth()
       .get()
@@ -25,8 +24,7 @@ function App() {
         <Navigation />
         <Switch>
           <Route path="/login">
-            <Login />
-            <RegisterForm />
+            <LoginContainer />
           </Route>
           <Route path="/myplants">
             <MyPlants />
