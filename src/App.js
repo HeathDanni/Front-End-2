@@ -6,6 +6,7 @@ import RegisterForm from "./components/RegisterForm";
 import Navigation from "./components/Navigation";
 import MyPlants from "./components/MyPlants";
 import AddPlant from "./components/AddPlant";
+import MyAccount from "./components/MyAccount";
 import { axiosWithAuth } from "./utils/axiosWithAuth";
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route path="/addplant">
             <AddPlant />
+          </Route>
+          <Route path="/myaccount">
+            <MyAccount/>
           </Route>
         </Switch>
       </Router>
