@@ -3,6 +3,7 @@ import { Card, TextField, MenuItem, InputLabel, Select, Button} from "@material-
 import { makeStyles } from "@material-ui/core/styles";
 // import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from 'axios';
+import * as yup from 'yup';
 
 const useStyles = makeStyles({
     root: {
@@ -41,8 +42,18 @@ const useStyles = makeStyles({
         "&:hover": {
             backgroundColor: "#6b7280"
         }
+    },
+
+    errorStyle: {
+        color: "red"
     }
 });
+
+const formSchema = yup.object().shape({
+    type: yup.string().required('Please, include the type of your plant'),
+    name: yup.string().required('Please, give this plant a nickname'),
+    frequency: yup.string().required('How often will you need to water your plant?'),
+})
 
 const AddPlant = () => {
       
@@ -54,23 +65,48 @@ const AddPlant = () => {
         frequency: ""
     });
 
-    // const [errors, setErrors] = useState({
-    //     type: "",
-    //     name: "",
-    //     frequency: ""
-    // });
+    const [errors, setErrors] = useState({
+        type: "",
+        name: "",
+        frequency: ""
+    });
+
+    const validate = (e) => {
+        yup.reach(formSchema, e.target.name)
+            .validate(e.target.value)
+            .then(valid => {
+                setErrors({
+                    ...errors,
+                    [e.target.name]: ""
+                })
+            })
+            .catch(err => {
+                setErrors({
+                    ...errors,
+                    [e.target.name]: err.errors[0]
+                })
+            })
+    };
+
+    const [disableBtn, setDisableBtn] = useState(true);
 
     const changeHandler = (e) => {
         e.persist()
+        validate(e)
         
         setFormData({
             ...formData, [e.target.name]: e.target.value
         });
-    };
+
+        if (formData.type.length >= 1 && formData.name.length >= 1 && formData.frequency.length >= 1) {
+                setDisableBtn(false);
+        };
+};
 
     console.log(formData);
 
     const [plant, setPlant] = useState([]);
+
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -112,6 +148,8 @@ const AddPlant = () => {
                         onChange={changeHandler}
                         value={formData.type}/>
 
+                {errors.type.length > 0 ? <p className={classes.errorStyle}>{errors.type}</p> : null} 
+
                     <TextField 
                         id="outlined-basic" 
                         name="name"
@@ -120,6 +158,8 @@ const AddPlant = () => {
                         className={classes.form}
                         onChange={changeHandler}
                         value={formData.name}/>
+
+                {errors.name.length > 0 ? <p className={classes.errorStyle}>{errors.name}</p> : null} 
 
                     <InputLabel id="label" className={classes.form} >Watering Frequency</InputLabel>
 
@@ -135,11 +175,14 @@ const AddPlant = () => {
                             <MenuItem value="Once a month">Once a month (recommended for cacti)</MenuItem>
                     </Select>
 
+                    {errors.frequency.length > 0 ? <p className={classes.errorStyle}>{errors.frequency}</p> : null} 
+
                     <Button 
                         type='submit'
                         variant="contained" 
                         color="primary"
-                        className={classes.button}>
+                        className={classes.button}
+                        disabled={disableBtn}>
                         Add Plant
                     </Button>
 
