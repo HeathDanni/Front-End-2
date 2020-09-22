@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import { Card, TextField, MenuItem, InputLabel, Select, Button} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-// import { axiosWithAuth } from "../utils/axiosWithAuth";
-import axios from 'axios';
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+// import axios from 'axios';
 import * as yup from 'yup';
 
 const useStyles = makeStyles({
