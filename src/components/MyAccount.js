@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   
     cards: {
       width: "50%",
-      height: "300px",
+      height: "350px",
       display: "flex",
       marginLeft: "25%",
       flexDirection: "column",
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     },
   
     cardText: {
-      margin: "20px 3% 10px 10%",
+      margin: "20px 3% 10px 5%",
       display: "flex",
       flexDirection: "column",
       fontSize: "20px"
@@ -72,6 +72,7 @@ const MyAccount = () => {
             <Card className={classes.cards} variant="outlined">
                 <form className={classes.cardText}>
                     <TextField
+                    className={classes.cardText}
                     id="username"
                     label="Username"
                     variant="outlined"
@@ -91,6 +92,7 @@ const MyAccount = () => {
                 />
 
                 <TextField
+                    className={classes.cardText}
                     id="password"
                     label="Password"
                     variant="outlined"
