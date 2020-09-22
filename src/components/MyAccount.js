@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Card, Button, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from 'axios';
 
 const useStyles = makeStyles({
     root: {
@@ -54,9 +55,10 @@ const MyAccount = () => {
 
     const [formInput, setFormInput] = useState({
         username: "Heather",
-        password: "****",
-        phoneNumber: "555-5555"
+        phoneNumber: "555-5555",
+        password: "****"
     });
+
 
     const handleChange = (e) => {
         
@@ -66,11 +68,26 @@ const MyAccount = () => {
         });
     };
 
+    console.log(formInput)
+
+    const upDate = (e) => {
+      e.preventDefault()
+
+      axios
+        .post('https://reqres.in/api/users', formInput)
+        .then((res) => {
+          console.log('res:', res);
+        })
+        .catch((err) => {
+          console.log('err:', err);
+        });
+    };
+
     return (
         <div className={classes.root}>
             <h1 className={classes.pageName}>My Account</h1>
             <Card className={classes.cards} variant="outlined">
-                <form className={classes.cardText}>
+                <form className={classes.cardText} onSubmit={upDate}>
                     <TextField
                     className={classes.cardText}
                     id="username"
@@ -105,8 +122,9 @@ const MyAccount = () => {
               variant="contained"
               color="primary"
               className={classes.button}
+              type='submit'
             >
-              Edit
+              Save
             </Button>
                 </form>
             </Card>
