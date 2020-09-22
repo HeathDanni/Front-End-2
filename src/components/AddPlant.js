@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Card, TextField, MenuItem, InputLabel, Select, Button} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
-// import axios from 'axios';
+// import { axiosWithAuth } from "../utils/axiosWithAuth";
+import axios from 'axios';
 import * as yup from 'yup';
 
 const useStyles = makeStyles({
@@ -71,6 +71,7 @@ const AddPlant = () => {
         frequency: ""
     });
 
+
     const validate = (e) => {
         yup.reach(formSchema, e.target.name)
             .validate(e.target.value)
@@ -98,27 +99,22 @@ const AddPlant = () => {
             ...formData, [e.target.name]: e.target.value
         });
 
-        if (formData.type.length >= 1 && formData.name.length >= 1 && formData.frequency.length >= 1) {
-                setDisableBtn(false);
-        };
+        console.log(formData.type.length);
+        console.log(formData.name.length)
+        console.log(formData.frequency.length)
 };
 
     console.log(formData);
-
-    const [plant, setPlant] = useState([]);
 
 
     const submitForm = (e) => {
         e.preventDefault();
 
-        axios
-            .post('https://reqres.in/api/users', formData)
-            .then(res => {console.log('res', res)
-                setPlant(
-                    ...plant,
-                        [res.data]
-                )})
-            .catch(err => {console.log('err', err)})
+        // axios
+        //     .post('https://reqres.in/api/users', formData)
+        //     .then(res => {console.log('res', res)
+        //         })
+        //     .catch(err => {console.log('err', err)})
 
         setFormData({
             type: "",
@@ -127,7 +123,6 @@ const AddPlant = () => {
         })
     };
 
-    console.log('plant', plant)
 
     return (
 
@@ -182,7 +177,7 @@ const AddPlant = () => {
                         variant="contained" 
                         color="primary"
                         className={classes.button}
-                        disabled={disableBtn}>
+                        >
                         Add Plant
                     </Button>
 
