@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card, Button } from "@material-ui/core";
+import React, {useState} from 'react';
+import { Card, Button, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -51,14 +51,54 @@ const useStyles = makeStyles({
 
 const MyAccount = () => {
     const classes = useStyles();
+
+    const [formInput, setFormInput] = useState({
+        username: "Heather",
+        password: "****",
+        phoneNumber: "555-5555"
+    });
+
+    const handleChange = (e) => {
+        
+        setFormInput({
+            ...formInput,
+                [e.target.name] : e.target.value
+        });
+    };
+
     return (
         <div className={classes.root}>
             <h1 className={classes.pageName}>My Account</h1>
             <Card className={classes.cards} variant="outlined">
-                <div className={classes.cardText}>
-                    <p>Username: this will be the username</p>
-                    <p>Email: this will be the email</p>
-                    <p>Password: this will be the password</p>
+                <form className={classes.cardText}>
+                    <TextField
+                    id="username"
+                    label="Username"
+                    variant="outlined"
+                    name="username"
+                    onChange={handleChange}
+                    disabled="true"
+                    value={formInput.username}
+                />
+                <TextField
+                    className={classes.textField}
+                    id="phoneNumber"
+                    label="Phone Number"
+                    variant="outlined"
+                    name="phoneNumber"
+                    onChange={handleChange}
+                    value={formInput.phoneNumber}
+                />
+
+                <TextField
+                    id="password"
+                    label="Password"
+                    variant="outlined"
+                    name="password"
+                    type="password"
+                    onChange={handleChange}
+                    value={formInput.password}
+                />
                     <Button
               variant="contained"
               color="primary"
@@ -66,7 +106,7 @@ const MyAccount = () => {
             >
               Edit
             </Button>
-                </div>
+                </form>
             </Card>
         </div>
     )
