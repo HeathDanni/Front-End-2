@@ -81,7 +81,7 @@ const MyAccount = () => {
                     value={formInput.username}
                 />
                 <TextField
-                    className={classes.textField}
+                    className={classes.cardText}
                     id="phoneNumber"
                     label="Phone Number"
                     variant="outlined"
