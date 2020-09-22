@@ -54,7 +54,7 @@ const Register = () => {
   const history = useHistory();
   const [credentials, setCredentials] = useState({
     username: "",
-    phoneNumber: "",
+    "phone-number": "",
     password: "",
   });
 
@@ -98,7 +98,7 @@ const Register = () => {
                 id="phoneNumber"
                 label="Phone Number"
                 variant="outlined"
-                name="phoneNumber"
+                name="phone-number"
                 onChange={handleChange}
               />
 
