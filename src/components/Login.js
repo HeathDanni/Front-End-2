@@ -83,9 +83,9 @@ const Login = () => {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         setUser({
-          id: res.data.id,
-          username: res.data.username,
-          phoneNumber: res.data.phone_number,
+          id: res.data.user.id,
+          username: res.data.user.username,
+          phoneNumber: res.data.user.phone_number,
         });
         history.push("/myplants");
       })
