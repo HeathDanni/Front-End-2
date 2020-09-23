@@ -72,7 +72,7 @@ const Register = () => {
     setUser({
       id: 1,
       username: "plantLover",
-      phone_number: "1234567890",
+      phoneNumber: "1234567890",
     });
     // axios
     //   .post(
@@ -85,7 +85,7 @@ const Register = () => {
     //     setUser({
     //       id: res.data.id,
     //       username: res.data.username,
-    //       phone_number: res.data.phone_number,
+    //       phoneNumber: res.data.phone_number,
     //     });
     //     history.push("/addplant");
     //   })
