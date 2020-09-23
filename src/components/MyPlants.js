@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/userContext";
 import { Card, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import EditPlant from "./EditPlant";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const useStyles = makeStyles({
   root: {
@@ -52,8 +52,21 @@ const useStyles = makeStyles({
 });
 
 const MyPlants = () => {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const classes = useStyles();
+
+  useEffect(() => {
+    if (user.id) {
+      axiosWithAuth()
+        .get(
+          `https://water-my-plants-365.herokuapp.com/api/users/${user.id}/plants`
+        )
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [user.id]);
 
   const PlantCard = () => {
     return (
@@ -64,13 +77,15 @@ const MyPlants = () => {
           <br></br>
           <span>Watering frequency: gets from input</span>
           <div className={classes.buttonDiv}>
-            <Link to="/myplants/edit/1"><Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-            >
-              Edit
-            </Button></Link>
+            <Link to="/myplants/edit/1">
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+              >
+                Edit
+              </Button>
+            </Link>
             <Button
               variant="contained"
               color="primary"
