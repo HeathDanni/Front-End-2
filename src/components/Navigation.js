@@ -44,7 +44,7 @@ const Navigation = () => {
 
           <NavLink to="/myplants" className={classes.navlink}><Button className={classes.button}>My Plants</Button></NavLink>
           <NavLink to="/addplant" className={classes.navlink}><Button className={classes.button}>Add Plant</Button></NavLink>
-          <NavLink to="#" className={classes.navlink}><Button className={classes.button}>My Account</Button></NavLink>
+          <NavLink to="/myaccount" className={classes.navlink}><Button className={classes.button}>My Account</Button></NavLink>
         </Toolbar>
       </AppBar>
     </div>
