@@ -27,15 +27,9 @@ function App() {
           <Route path="/login">
             <LoginContainer />
           </Route>
-          <PrivateRoute path="/myplants">
-            <MyPlants />
-          </PrivateRoute>
-          <PrivateRoute path="/addplant">
-            <AddPlant />
-          </PrivateRoute>
-          <PrivateRoute path="/myaccount">
-            <MyAccount />
-          </PrivateRoute>
+          <PrivateRoute path="/myplants" component={MyPlants} />
+          <PrivateRoute path="/addplant" component={AddPlant} />
+          <PrivateRoute path="/myaccount" component={MyAccount} />
         </Switch>
       </Router>
     </UserContext.Provider>
