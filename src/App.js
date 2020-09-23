@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 import { UserContext } from "./contexts/userContext";
 import LoginContainer from "./components/LoginContainer";
 import Navigation from "./components/Navigation";
@@ -26,15 +27,9 @@ function App() {
           <Route path="/login">
             <LoginContainer />
           </Route>
-          <Route path="/myplants">
-            <MyPlants />
-          </Route>
-          <Route path="/addplant">
-            <AddPlant />
-          </Route>
-          <Route path="/myaccount">
-            <MyAccount />
-          </Route>
+          <PrivateRoute path="/myplants" component={MyPlants} />
+          <PrivateRoute path="/addplant" component={AddPlant} />
+          <PrivateRoute path="/myaccount" component={MyAccount} />
         </Switch>
       </Router>
     </UserContext.Provider>
