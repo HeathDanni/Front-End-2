@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import {
   Card,
   TextField,
@@ -9,6 +9,9 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import * as yup from "yup";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { UserContext } from "../contexts/userContext";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -74,6 +77,8 @@ const AddPlant = () => {
     name: "",
     frequency: "",
   });
+  const { user } = useContext(UserContext);
+  const history = useHistory();
 
   const validate = (e) => {
     yup
@@ -113,18 +118,26 @@ const AddPlant = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-
-    // axios
-    //     .post('https://reqres.in/api/users', formData)
-    //     .then(res => {console.log('res', res)
-    //         })
-    //     .catch(err => {console.log('err', err)})
-
-    setFormData({
-      type: "",
-      name: "",
-      frequency: "",
-    });
+    const plantData = {
+      nickname: formData.name,
+      species: formData.type,
+      H20Frequency: formData.frequency,
+      user_id: user.id,
+    };
+    axiosWithAuth()
+      .post("https://water-my-plants-365.herokuapp.com/api/plants", plantData)
+      .then((res) => {
+        console.log("res", res);
+        setFormData({
+          type: "",
+          name: "",
+          frequency: "",
+        });
+        history.push("/myplants");
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
   };
 
   return (
@@ -171,7 +184,7 @@ const AddPlant = () => {
             value={formData.frequency}
             onChange={changeHandler}
           >
-            <MenuItem value="Everday">Everyday</MenuItem>
+            <MenuItem value="Everyday">Everyday</MenuItem>
             <MenuItem value="Every 3 days">
               Every 3 days (recommended for most house plants)
             </MenuItem>

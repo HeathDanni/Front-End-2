@@ -69,27 +69,27 @@ const Login = () => {
   const login = (e) => {
     e.preventDefault();
     console.log(credentials);
-    localStorage.setItem("token", "12345");
-    setUser({
-      id: 1,
-      username: "plantLover",
-      phoneNumber: "1234567890",
-    });
-    // axios
-    //   .post(
-    //     "https://water-my-plants-365.herokuapp.com/api/auth/login",
-    //     credentials
-    //   )
-    //   .then((res) => {
-    //     localStorage.setItem("token", res.data.token);
-    //     setUser({
-    //       id: res.data.id,
-    //       username: res.data.username,
-    //       phoneNumber: res.data.phone_number,
-    //     });
-    //     history.push("/myplants");
-    //   })
-    //   .catch((err) => console.error(err));
+    // localStorage.setItem("token", "12345");
+    // setUser({
+    //   id: 1,
+    //   username: "plantLover",
+    //   phoneNumber: "1234567890",
+    // });
+    axios
+      .post(
+        "https://water-my-plants-365.herokuapp.com/api/auth/login",
+        credentials
+      )
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        setUser({
+          id: res.data.id,
+          username: res.data.username,
+          phoneNumber: res.data.phone_number,
+        });
+        history.push("/myplants");
+      })
+      .catch((err) => console.error(err));
   };
 
   return (

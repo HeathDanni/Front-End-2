@@ -20,7 +20,7 @@ function App() {
           <Route path="/login">
             <LoginContainer />
           </Route>
-          <PrivateRoute path="/myplants/edit/1" component={EditPlant} />
+          <PrivateRoute path="/myplants/edit/:plantId" component={EditPlant} />
           <PrivateRoute path="/myplants" component={MyPlants} />
           <PrivateRoute path="/addplant" component={AddPlant} />
           <PrivateRoute path="/myaccount" component={MyAccount} />

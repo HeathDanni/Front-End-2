@@ -3,6 +3,7 @@ import { UserContext } from "../contexts/userContext";
 import { Card, Button, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const useStyles = makeStyles({
   root: {
@@ -73,8 +74,11 @@ const MyAccount = () => {
   const upDate = (e) => {
     e.preventDefault();
 
-    axios
-      .post("https://reqres.in/api/users", formInput)
+    axiosWithAuth()
+      .put(
+        `https://water-my-plants-365.herokuapp.com/users/${user.id}`,
+        formInput
+      )
       .then((res) => {
         console.log("res:", res);
       })
