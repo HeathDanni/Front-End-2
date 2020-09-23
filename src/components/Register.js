@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Button, TextField } from "@material-ui/core";
 
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 
   button: {
     marginTop: "5%",
-    marginBottom: "20px",
+    marginBottom: "10px",
     fontSize: "12px",
     backgroundColor: "#669966",
     "&:hover": {
@@ -49,43 +49,47 @@ const useStyles = makeStyles({
   },
 });
 
-const Login = () => {
+const Register = () => {
   const classes = useStyles();
   const history = useHistory();
   const [credentials, setCredentials] = useState({
     username: "",
+    phone_number: "",
     password: "",
   });
 
   const handleChange = (e) => {
-    setCredentials({
-      ...credentials,
-      [e.target.name]: e.target.value,
-    });
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-  const login = (e) => {
+  const register = (e) => {
     e.preventDefault();
     console.log(credentials);
+    console.log("Starting POST request");
     axios
       .post(
-        "https://water-my-plants-365.herokuapp.com/api/auth/login",
+        "https://water-my-plants-365.herokuapp.com/api/auth/register",
         credentials
       )
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        history.push("/myplants");
+        console.log("Successful POST request");
+        console.log(res);
+        // localStorage.setItem("token", res.data.token);
+        // history.push("/addplant");
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.log("Unsuccessful POST request");
+        console.error(err);
+      });
   };
 
   return (
     <div>
-      <h1 className={classes.pageName}>Log In</h1>
+      <h1 className={classes.pageName}>Register</h1>
       <div className={classes.root}>
         <Card className={classes.cards} variant="outlined">
           <div className={classes.cardText}>
-            <form onSubmit={login} className={classes.root}>
+            <form onSubmit={register} className={classes.root}>
               <TextField
                 className={classes.textField}
                 id="username"
@@ -94,6 +98,15 @@ const Login = () => {
                 name="username"
                 onChange={handleChange}
               />
+              <TextField
+                className={classes.textField}
+                id="phoneNumber"
+                label="Phone Number"
+                variant="outlined"
+                name="phone_number"
+                onChange={handleChange}
+              />
+
               <TextField
                 id="password"
                 label="Password"
@@ -108,7 +121,7 @@ const Login = () => {
                 type="submit"
                 className={classes.button}
               >
-                Log In
+                Create My Account
               </Button>
             </form>
           </div>
@@ -118,4 +131,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

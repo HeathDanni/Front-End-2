@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import { UserContext } from "./contexts/userContext";
-import Login from "./components/Login";
-import RegisterForm from "./components/RegisterForm";
+import LoginContainer from "./components/LoginContainer";
 import Navigation from "./components/Navigation";
 import MyPlants from "./components/MyPlants";
 import AddPlant from "./components/AddPlant";
@@ -25,8 +24,7 @@ function App() {
         <Navigation />
         <Switch>
           <Route path="/login">
-            <Login />
-            <RegisterForm />
+            <LoginContainer />
           </Route>
           <PrivateRoute path="/myplants">
             <MyPlants />
