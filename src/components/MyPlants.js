@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { UserContext } from "../contexts/userContext";
 import { Card, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
@@ -52,42 +53,49 @@ const useStyles = makeStyles({
 const MyPlants = () => {
   const user = useContext(UserContext);
   const classes = useStyles();
+  const [plants, setPlants] = useState({});
 
-  const PlantCard = () => {
-    return (
-      <Card className={classes.cards} variant="outlined">
-        <div className={classes.cardText}>
-          <h3>Plant Type</h3>
-          <span>Nickname: gets from input</span>
-          <br></br>
-          <span>Watering frequency: gets from input</span>
-          <div className={classes.buttonDiv}>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-            >
-              Edit
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-            >
-              Remove
-            </Button>
-          </div>
-        </div>
-      </Card>
-    );
-  };
+  axios
+    .get(`https://water-my-plants-365.herokuapp.com/api/users/${user.id}/plants`)
+    .then(res => {
+      console.log('res:', res);
+      setPlants(res.data);
+  })
+    .catch(err => {
+      console.log('err:', err)
+    })
+
+    console.log(plants)
+
 
   return (
     <div className={classes.root}>
       <h1 className={classes.pageName}>My Plants</h1>
-      <PlantCard />
-      <PlantCard />
-      <PlantCard />
+        {plants.map((el) => {
+          return <Card className={classes.cards} variant="outlined">
+            <div className={classes.cardText}>
+              <h3>{el.species}</h3>
+              <span>Nickname: {el.nickname}</span>
+              <br></br>
+              <span>Watering frequency: {el.H2oFrequency}</span>
+              <div className={classes.buttonDiv}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}>
+                  Edit
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}>
+                  Remove
+                </Button>
+              </div>
+            </div>
+          </Card>
+        }
+      )};
     </div>
   );
 };
