@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
+import { Link } from 'react-router-dom'
 import { UserContext } from "../contexts/userContext";
 import { Card, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import EditPlant from "./EditPlant";
 
 const useStyles = makeStyles({
   root: {
@@ -62,13 +64,13 @@ const MyPlants = () => {
           <br></br>
           <span>Watering frequency: gets from input</span>
           <div className={classes.buttonDiv}>
-            <Button
+            <Link to="/myplants/edit/1"><Button
               variant="contained"
               color="primary"
               className={classes.button}
             >
               Edit
-            </Button>
+            </Button></Link>
             <Button
               variant="contained"
               color="primary"
