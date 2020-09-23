@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../contexts/userContext";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Button, TextField } from "@material-ui/core";
 
@@ -52,6 +53,7 @@ const useStyles = makeStyles({
 const Login = () => {
   const classes = useStyles();
   const history = useHistory();
+  const { setUser } = useContext(UserContext);
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -67,16 +69,27 @@ const Login = () => {
   const login = (e) => {
     e.preventDefault();
     console.log(credentials);
-    axios
-      .post(
-        "https://water-my-plants-365.herokuapp.com/api/auth/login",
-        credentials
-      )
-      .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        history.push("/myplants");
-      })
-      .catch((err) => console.error(err));
+    localStorage.setItem("token", "12345");
+    setUser({
+      id: 1,
+      username: "plantLover",
+      phone_number: "1234567890",
+    });
+    // axios
+    //   .post(
+    //     "https://water-my-plants-365.herokuapp.com/api/auth/login",
+    //     credentials
+    //   )
+    //   .then((res) => {
+    //     localStorage.setItem("token", res.data.token);
+    //     setUser({
+    //       id: res.data.id,
+    //       username: res.data.username,
+    //       phone_number: res.data.phone_number,
+    //     });
+    //     history.push("/myplants");
+    //   })
+    //   .catch((err) => console.error(err));
   };
 
   return (

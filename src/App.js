@@ -19,7 +19,7 @@ function App() {
   });
 
   return (
-    <UserContext.Provider value={user}>
+    <UserContext.Provider value={{ user, setUser }}>
       <Router>
         <Navigation />
         <Switch>
@@ -33,7 +33,7 @@ function App() {
             <AddPlant />
           </Route>
           <Route path="/myaccount">
-            <MyAccount/>
+            <MyAccount />
           </Route>
         </Switch>
       </Router>

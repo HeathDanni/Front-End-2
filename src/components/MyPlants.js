@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "../contexts/userContext";
 import { Card, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const useStyles = makeStyles({
   root: {
@@ -50,8 +51,21 @@ const useStyles = makeStyles({
 });
 
 const MyPlants = () => {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const classes = useStyles();
+
+  useEffect(() => {
+    if (user.id) {
+      axiosWithAuth()
+        .get(
+          `https://water-my-plants-365.herokuapp.com/api/users/${user.id}/plants`
+        )
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [user.id]);
 
   const PlantCard = () => {
     return (

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../contexts/userContext";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Button, TextField } from "@material-ui/core";
 
@@ -52,6 +53,7 @@ const useStyles = makeStyles({
 const Register = () => {
   const classes = useStyles();
   const history = useHistory();
+  const { setUser } = useContext(UserContext);
   const [credentials, setCredentials] = useState({
     username: "",
     phone_number: "",
@@ -66,21 +68,31 @@ const Register = () => {
     e.preventDefault();
     console.log(credentials);
     console.log("Starting POST request");
-    axios
-      .post(
-        "https://water-my-plants-365.herokuapp.com/api/auth/register",
-        credentials
-      )
-      .then((res) => {
-        console.log("Successful POST request");
-        console.log(res);
-        // localStorage.setItem("token", res.data.token);
-        // history.push("/addplant");
-      })
-      .catch((err) => {
-        console.log("Unsuccessful POST request");
-        console.error(err);
-      });
+    localStorage.setItem("token", "12345");
+    setUser({
+      id: 1,
+      username: "plantLover",
+      phone_number: "1234567890",
+    });
+    // axios
+    //   .post(
+    //     "https://water-my-plants-365.herokuapp.com/api/auth/register",
+    //     credentials
+    //   )
+    //   .then((res) => {
+    //     console.log("Successful POST request");
+    //     localStorage.setItem("token", res.data.token);
+    //     setUser({
+    //       id: res.data.id,
+    //       username: res.data.username,
+    //       phone_number: res.data.phone_number,
+    //     });
+    //     history.push("/addplant");
+    //   })
+    //   .catch((err) => {
+    //     console.log("Unsuccessful POST request");
+    //     console.error(err);
+    //   });
   };
 
   return (
