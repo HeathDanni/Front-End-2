@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import MyPlants from "./components/MyPlants";
 import AddPlant from "./components/AddPlant";
 import MyAccount from "./components/MyAccount";
+import EditPlant from "./components/EditPlant";
 
 function App() {
   const [user, setUser] = useState({});
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login">
             <LoginContainer />
           </Route>
+          <PrivateRoute path="/myplants/edit/1" component={EditPlant} />
           <PrivateRoute path="/myplants" component={MyPlants} />
           <PrivateRoute path="/addplant" component={AddPlant} />
           <PrivateRoute path="/myaccount" component={MyAccount} />

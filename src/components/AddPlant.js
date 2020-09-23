@@ -8,8 +8,6 @@ import {
   Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-// import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 import * as yup from "yup";
 
 const useStyles = makeStyles({
