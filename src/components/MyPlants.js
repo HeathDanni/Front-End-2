@@ -86,15 +86,20 @@ const MyPlants = () => {
 
   useEffect(() => {
     if (user.id) {
+      console.log(`About to to send GET request`);
       axiosWithAuth()
         .get(
           `https://water-my-plants-365.herokuapp.com/api/plants/users/${user.id}/plants`
         )
         .then((res) => {
+          console.log("Successful request");
           console.log(res.data);
           setPlants(res.data);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.log("Unsuccessful request");
+          console.error(err);
+        });
     }
   }, [user.id]);
 
