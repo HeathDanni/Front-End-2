@@ -82,7 +82,7 @@ const MyPlants = () => {
     if (user.id) {
       axiosWithAuth()
         .get(
-          `https://water-my-plants-365.herokuapp.com/api/users/${user.id}/plants`
+          `https://water-my-plants-365.herokuapp.com/api/plants/users/${user.id}/plants`
         )
         .then((res) => {
           console.log(res.data);

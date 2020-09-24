@@ -85,12 +85,15 @@ const EditPlant = () => {
 
   const upDate = (e) => {
     e.preventDefault();
-    const plantInfo = { ...formInput, id: plantId, user_id: user.id };
+    const plantInfo = {
+      nickname: formInput.nickname,
+      species: formInput.type,
+      H20Frequency: formInput.frequency,
+      id: plantId,
+      user_id: user.id,
+    };
     axiosWithAuth()
-      .post(
-        `https://water-my-plants-365.herokuapp.com/api/plants/${plantId}`,
-        plantInfo
-      )
+      .post(`https://water-my-plants-365.herokuapp.com/api/plants`, plantInfo)
       .then((res) => {
         console.log("res:", res);
         history.push("/myplants");
