@@ -8,5 +8,6 @@ export const axiosWithAuth = () => {
     headers: {
       Authorization: token,
     },
+    withCredentials: true,
   });
 };
