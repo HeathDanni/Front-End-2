@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import { UserContext } from "./contexts/userContext";
 import LoginContainer from "./components/LoginContainer";
@@ -11,9 +16,10 @@ import EditPlant from "./components/EditPlant";
 
 function App() {
   const [user, setUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, loggedIn, setLoggedIn }}>
       <Router>
         <Navigation />
         <Switch>
@@ -24,6 +30,15 @@ function App() {
           <PrivateRoute path="/myplants" component={MyPlants} />
           <PrivateRoute path="/addplant" component={AddPlant} />
           <PrivateRoute path="/myaccount" component={MyAccount} />
+          <Route
+            exact
+            path="/"
+            component={() => {
+              window.location.href =
+                "https://test1-drab.vercel.app/landing_page.html";
+              return null;
+            }}
+          />
         </Switch>
       </Router>
     </UserContext.Provider>
