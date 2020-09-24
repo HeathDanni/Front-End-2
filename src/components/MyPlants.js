@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/userContext";
 import { Card, Button } from "@material-ui/core";
@@ -56,7 +56,6 @@ const MyPlants = () => {
   const classes = useStyles();
   const [plants, setPlants] = useState([]);
 
-
   useEffect(() => {
     if (user.id) {
       axiosWithAuth()
@@ -65,19 +64,20 @@ const MyPlants = () => {
         )
         .then((res) => {
           console.log(res.data);
-          setPlants(res.data)
+          setPlants(res.data);
         })
         .catch((err) => console.error(err));
     }
   }, [user.id]);
 
-  console.log(plants)
+  console.log(plants);
 
   return (
     <div className={classes.root}>
       <h1 className={classes.pageName}>My Plants</h1>
-        {plants.map((el) => {
-          return <Card className={classes.cards} variant="outlined">
+      {plants.map((el) => {
+        return (
+          <Card className={classes.cards} variant="outlined">
             <div className={classes.cardText}>
               <h3>{el.species}</h3>
               <span>Nickname: {el.nickname}</span>
@@ -87,20 +87,23 @@ const MyPlants = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  className={classes.button}>
+                  className={classes.button}
+                >
                   Edit
                 </Button>
                 <Button
                   variant="contained"
                   color="primary"
-                  className={classes.button}>
+                  className={classes.button}
+                >
                   Remove
                 </Button>
               </div>
             </div>
           </Card>
-        }
-      )};
+        );
+      })}
+      ;
     </div>
   );
 };
