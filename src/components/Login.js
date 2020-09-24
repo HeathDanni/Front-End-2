@@ -53,7 +53,7 @@ const useStyles = makeStyles({
 const Login = () => {
   const classes = useStyles();
   const history = useHistory();
-  const { setUser } = useContext(UserContext);
+  const { setUser, setLoggedIn } = useContext(UserContext);
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -69,12 +69,6 @@ const Login = () => {
   const login = (e) => {
     e.preventDefault();
     console.log(credentials);
-    // localStorage.setItem("token", "12345");
-    // setUser({
-    //   id: 1,
-    //   username: "plantLover",
-    //   phoneNumber: "1234567890",
-    // });
     axios
       .post(
         "https://water-my-plants-365.herokuapp.com/api/auth/login",
@@ -87,6 +81,7 @@ const Login = () => {
           username: res.data.user.username,
           phoneNumber: res.data.user.phone_number,
         });
+        setLoggedIn(true);
         history.push("/myplants");
       })
       .catch((err) => console.error(err));
