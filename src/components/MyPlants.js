@@ -4,6 +4,7 @@ import { UserContext } from "../contexts/userContext";
 import { Card, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
@@ -52,8 +53,8 @@ const useStyles = makeStyles({
 
   link: {
     textDecoration: "none",
-    marginTop: "4.5%"
-  }
+    marginTop: "4.5%",
+  },
 });
 
 const MyPlants = () => {
@@ -85,7 +86,7 @@ const MyPlants = () => {
 
   useEffect(() => {
     if (user.id) {
-      axiosWithAuth()
+      axios
         .get(
           `https://water-my-plants-365.herokuapp.com/api/plants/users/${user.id}/plants`
         )
