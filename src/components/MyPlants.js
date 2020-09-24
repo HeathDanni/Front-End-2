@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/userContext";
 import { Card, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const useStyles = makeStyles({
   root: {
@@ -51,22 +52,26 @@ const useStyles = makeStyles({
 });
 
 const MyPlants = () => {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const classes = useStyles();
-  const [plants, setPlants] = useState({});
+  const [plants, setPlants] = useState([]);
 
-  axios
-    .get(`https://water-my-plants-365.herokuapp.com/api/users/${user.id}/plants`)
-    .then(res => {
-      console.log('res:', res);
-      setPlants(res.data);
-  })
-    .catch(err => {
-      console.log('err:', err)
-    })
 
-    console.log(plants)
+  useEffect(() => {
+    if (user.id) {
+      axiosWithAuth()
+        .get(
+          `https://water-my-plants-365.herokuapp.com/api/users/${user.id}/plants`
+        )
+        .then((res) => {
+          console.log(res.data);
+          setPlants(res.data)
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [user.id]);
 
+  console.log(plants)
 
   return (
     <div className={classes.root}>
