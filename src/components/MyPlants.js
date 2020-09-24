@@ -86,7 +86,7 @@ const MyPlants = () => {
 
   useEffect(() => {
     if (user.id) {
-      axios
+      axiosWithAuth()
         .get(
           `https://water-my-plants-365.herokuapp.com/api/plants/users/${user.id}/plants`
         )
