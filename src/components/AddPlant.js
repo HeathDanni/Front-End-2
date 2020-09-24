@@ -121,7 +121,7 @@ const AddPlant = () => {
     const plantData = {
       nickname: formData.name,
       species: formData.type,
-      H20Frequency: formData.frequency,
+      H2oFrequency: formData.frequency,
       user_id: user.id,
     };
     console.log(`This is the object we're sending: ${plantData}`);

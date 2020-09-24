@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/userContext";
 import { Card, Button } from "@material-ui/core";
@@ -54,53 +54,97 @@ const useStyles = makeStyles({
 const MyPlants = () => {
   const { user } = useContext(UserContext);
   const classes = useStyles();
-  const [plants, setPlants] = useState([]);
-
+  const [plants, setPlants] = useState([
+    {
+      id: 1,
+      nickname: "American sheepbush",
+      species: "Pentzia incana",
+      H2oFrequency: "8 days",
+      user_id: 1,
+    },
+    {
+      id: 2,
+      nickname: "tree",
+      species: "tree",
+      H2oFrequency: "Every 3 days",
+      user_id: 1,
+    },
+    {
+      id: 3,
+      nickname: "Ferny",
+      species: "fern",
+      H2oFrequency: "Everyday",
+      user_id: 1,
+    },
+  ]);
 
   useEffect(() => {
     if (user.id) {
       axiosWithAuth()
         .get(
-          `https://water-my-plants-365.herokuapp.com/api/users/${user.id}/plants`
+          `https://water-my-plants-365.herokuapp.com/api/plants/users/${user.id}/plants`
         )
         .then((res) => {
           console.log(res.data);
-          setPlants(res.data)
+          setPlants(res.data);
         })
         .catch((err) => console.error(err));
     }
   }, [user.id]);
 
-  console.log(plants)
+  const handleRemoveClick = (e) => {
+    axiosWithAuth()
+      .delete(
+        `https://water-my-plants-365.herokuapp.com/api/plants/${e.currentTarget.id}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setPlants(
+          plants.filter((plant) => plant.id !== parseInt(e.currentTarget.id))
+        );
+      })
+      .catch((err) => console.error(err));
+  };
+
+  console.log(plants);
 
   return (
     <div className={classes.root}>
       <h1 className={classes.pageName}>My Plants</h1>
-        {plants.map((el) => {
-          return <Card className={classes.cards} variant="outlined">
+      {plants.map((el) => {
+        return (
+          <Card className={classes.cards} key={el.id} variant="outlined">
             <div className={classes.cardText}>
               <h3>{el.species}</h3>
               <span>Nickname: {el.nickname}</span>
               <br></br>
               <span>Watering frequency: {el.H2oFrequency}</span>
               <div className={classes.buttonDiv}>
+                <Link to={`/myplants/edit/${el.id}`}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                  >
+                    Edit
+                  </Button>
+                </Link>
                 <Button
                   variant="contained"
                   color="primary"
-                  className={classes.button}>
-                  Edit
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}>
+                  id={el.id}
+                  name={el.id}
+                  onClick={handleRemoveClick}
+                  className={classes.button}
+                >
                   Remove
                 </Button>
               </div>
             </div>
           </Card>
-        }
-      )};
+        );
+      })}
+      ;
     </div>
   );
 };
