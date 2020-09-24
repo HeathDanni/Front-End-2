@@ -49,6 +49,11 @@ const useStyles = makeStyles({
       backgroundColor: "#6b7280",
     },
   },
+
+  link: {
+    textDecoration: "none",
+    marginTop: "4.5%"
+  }
 });
 
 const MyPlants = () => {
@@ -120,7 +125,7 @@ const MyPlants = () => {
               <br></br>
               <span>Watering frequency: {el.H2oFrequency}</span>
               <div className={classes.buttonDiv}>
-                <Link to={`/myplants/edit/${el.id}`}>
+                <Link to={`/myplants/edit/${el.id}`} className={classes.link}>
                   <Button
                     variant="contained"
                     color="primary"
