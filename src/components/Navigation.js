@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../contexts/userContext";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import logo from "./logo.png";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,25 +28,45 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   navlink: {
-    textDecoration:'none'
-  }
+    textDecoration: "none",
+  },
 }));
 
 const Navigation = () => {
   const classes = useStyles();
+  const { loggedIn } = useContext(UserContext);
 
   return (
     <div>
       <AppBar className={classes.root} position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            <img src={logo} className={classes.logo} alt="Logo" />
-          </Typography>
+        {!loggedIn && (
+          <Toolbar>
+            <Typography variant="h6" className={classes.title}>
+              <img src={logo} className={classes.logo} alt="Logo" />
+            </Typography>
+            <NavLink to="/login" className={classes.navlink}>
+              <Button className={classes.button}>Login</Button>
+            </NavLink>
+          </Toolbar>
+        )}
 
-          <NavLink to="/myplants" className={classes.navlink}><Button className={classes.button}>My Plants</Button></NavLink>
-          <NavLink to="/addplant" className={classes.navlink}><Button className={classes.button}>Add Plant</Button></NavLink>
-          <NavLink to="/myaccount" className={classes.navlink}><Button className={classes.button}>My Account</Button></NavLink>
-        </Toolbar>
+        {loggedIn && (
+          <Toolbar>
+            <Typography variant="h6" className={classes.title}>
+              <img src={logo} className={classes.logo} alt="Logo" />
+            </Typography>
+
+            <NavLink to="/myplants" className={classes.navlink}>
+              <Button className={classes.button}>My Plants</Button>
+            </NavLink>
+            <NavLink to="/addplant" className={classes.navlink}>
+              <Button className={classes.button}>Add Plant</Button>
+            </NavLink>
+            <NavLink to="/myaccount" className={classes.navlink}>
+              <Button className={classes.button}>My Account</Button>
+            </NavLink>
+          </Toolbar>
+        )}
       </AppBar>
     </div>
   );
