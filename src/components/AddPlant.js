@@ -124,6 +124,8 @@ const AddPlant = () => {
       H20Frequency: formData.frequency,
       user_id: user.id,
     };
+    console.log(`This is the object we're sending: ${plantData}`);
+
     axiosWithAuth()
       .post("https://water-my-plants-365.herokuapp.com/api/plants", plantData)
       .then((res) => {
