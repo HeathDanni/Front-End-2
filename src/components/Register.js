@@ -68,12 +68,6 @@ const Register = () => {
     e.preventDefault();
     console.log(credentials);
     console.log("Starting POST request");
-    // localStorage.setItem("token", "12345");
-    // setUser({
-    //   id: 1,
-    //   username: "plantLover",
-    //   phoneNumber: "1234567890",
-    // });
     axios
       .post(
         "https://water-my-plants-365.herokuapp.com/api/auth/register",
@@ -81,13 +75,7 @@ const Register = () => {
       )
       .then((res) => {
         console.log("Successful POST request");
-        localStorage.setItem("token", res.data.token);
-        setUser({
-          id: res.data.id,
-          username: res.data.username,
-          phoneNumber: res.data.phone_number,
-        });
-        history.push("/addplant");
+        history.push("/login");
       })
       .catch((err) => {
         console.log("Unsuccessful POST request");
