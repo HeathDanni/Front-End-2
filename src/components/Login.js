@@ -53,7 +53,7 @@ const useStyles = makeStyles({
 const Login = () => {
   const classes = useStyles();
   const history = useHistory();
-  const { setUser, setLoggedIn } = useContext(UserContext);
+  const { setUser, setLoggedIn, setCookie } = useContext(UserContext);
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -76,6 +76,7 @@ const Login = () => {
       )
       .then((res) => {
         localStorage.setItem("token", res.data.token);
+        setCookie("token", res.data.token, { path: "/" });
         setUser({
           id: res.data.user.id,
           username: res.data.user.username,
