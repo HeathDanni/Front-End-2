@@ -71,7 +71,7 @@ const Login = () => {
     console.log(credentials);
     axios
       .post(
-        "https://water-my-plants-365.herokuapp.com/api/auth/login",
+        "https://secret-family-recipe-backend.herokuapp.com/api/auth/login",
         credentials
       )
       .then((res) => {
@@ -80,7 +80,6 @@ const Login = () => {
         setUser({
           id: res.data.user.id,
           username: res.data.user.username,
-          phoneNumber: res.data.user.phone_number,
         });
         setLoggedIn(true);
         history.push("/myplants");

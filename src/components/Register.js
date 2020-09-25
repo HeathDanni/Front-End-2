@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { UserContext } from "../contexts/userContext";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Button, TextField } from "@material-ui/core";
 
@@ -53,10 +52,13 @@ const useStyles = makeStyles({
 const Register = () => {
   const classes = useStyles();
   const history = useHistory();
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useState({
+    username: "",
+    password: "",
+  });
+
   const [credentials, setCredentials] = useState({
     username: "",
-    phone_number: "",
     password: "",
   });
 
@@ -70,7 +72,7 @@ const Register = () => {
     console.log("Starting POST request");
     axios
       .post(
-        "https://water-my-plants-365.herokuapp.com/api/auth/register",
+        "https://secret-family-recipe-backend.herokuapp.com/api/auth/register",
         credentials
       )
       .then((res) => {
@@ -96,14 +98,6 @@ const Register = () => {
                 label="Username"
                 variant="outlined"
                 name="username"
-                onChange={handleChange}
-              />
-              <TextField
-                className={classes.textField}
-                id="phoneNumber"
-                label="Phone Number"
-                variant="outlined"
-                name="phone_number"
                 onChange={handleChange}
               />
 

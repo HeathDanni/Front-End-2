@@ -14,6 +14,7 @@ import MyPlants from "./components/MyPlants";
 import AddPlant from "./components/AddPlant";
 import MyAccount from "./components/MyAccount";
 import EditPlant from "./components/EditPlant";
+import Register from "./components/Register";
 
 function App() {
   const [user, setUser] = useState({});
@@ -29,6 +30,9 @@ function App() {
         <Switch>
           <Route path="/login">
             <LoginContainer />
+          </Route>
+          <Route path="/signup">
+            <Register/>
           </Route>
           <PrivateRoute path="/myplants/edit/:plantId" component={EditPlant} />
           <PrivateRoute path="/myplants" component={MyPlants} />
