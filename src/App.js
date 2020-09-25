@@ -5,6 +5,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import PrivateRoute from "./components/PrivateRoute";
 import { UserContext } from "./contexts/userContext";
 import LoginContainer from "./components/LoginContainer";
@@ -17,9 +18,12 @@ import EditPlant from "./components/EditPlant";
 function App() {
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [cookies, setCookie] = useCookies(["token"]);
 
   return (
-    <UserContext.Provider value={{ user, setUser, loggedIn, setLoggedIn }}>
+    <UserContext.Provider
+      value={{ user, setUser, loggedIn, setLoggedIn, cookies, setCookie }}
+    >
       <Router>
         <Navigation />
         <Switch>
